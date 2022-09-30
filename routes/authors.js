@@ -10,12 +10,11 @@ router.get('/', async(req,res)=>{
     let searchOption={}
     if(req.query.name != null && req.query.name !== ''){
         searchOption.name = new RegExp(req.query.name , 'i')
-
     }
     try{
         const authors = await Author.find({searchOption})
         res.render('authors/index',{
-            authors: authors, 
+            authors: authors,  
             searchOption:req.query
         })
     }catch {
