@@ -8,10 +8,8 @@ const authorSchema = new mongoose.Schema({
     validate: /\S+/
  }
 })
-authorSchema.pre('remove', async function(next){
-   console.log(this.id);
-   let books=await Book.find({author:this.id})
-      console.log(books);
+authorSchema.pre('remove', function(next){
+   Book.find({author:this.id+' '},(err,books)=>{
       if (err){
          next(err)
       } else if (books.length>0){
@@ -19,7 +17,7 @@ authorSchema.pre('remove', async function(next){
       } else {
          next()
       }
-   
+   })
 })
 
 module.exports = mongoose.model('Author', authorSchema)

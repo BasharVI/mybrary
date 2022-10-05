@@ -34,7 +34,7 @@ const bookSchema = new mongoose.Schema({
    required:true
  },
  author:{
-    type: mongoose.Schema.Types.String,
+    type:mongoose.Schema.Types.String,
     required:true,
     ref:'Author'
  }
